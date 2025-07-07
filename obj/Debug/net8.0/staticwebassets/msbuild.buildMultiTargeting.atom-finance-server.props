@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/atom-finance-server.props" />
+</Project>

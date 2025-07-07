@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "80z2ia5HLKSkSAVhOUMGPI1FsLVVvoVW3io4yFZcYMo=",
+  "Source": "atom-finance-server",
+  "BasePath": "_content/atom-finance-server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
