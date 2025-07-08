@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using atom_finance_server.Data;
 using atom_finance_server.Dtos.Stock;
+using atom_finance_server.Interfaces;
 using atom_finance_server.Mappers;
 using atom_finance_server.Models;
+using atom_finance_server.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,16 +18,20 @@ namespace atom_finance_server.Controllers
     public class StockController : ControllerBase
     {
         private readonly ApplicationDBContext _context;
-        public StockController(ApplicationDBContext context)
+        private readonly IStockRepository _stockRepository;
+
+        public StockController(ApplicationDBContext context, IStockRepository stockRepository)
         {
             _context = context;
+            _stockRepository = stockRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             //ToList - deferred excecution
-            var stocks = await _context.Stocks.ToListAsync();
+            var stocks = await _stockRepository.GetAllAsync();
+
             var stockDto = stocks.Select(s => s.ToStockDto());
 
             return Ok(stocks);
