@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using atom_finance_server.Data;
+using atom_finance_server.Dtos.Stock;
 using atom_finance_server.Mappers;
 using atom_finance_server.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,16 @@ namespace atom_finance_server.Controllers
             }
 
             return Ok(stock.ToStockDto());
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+        {
+            var stockModel = stockDto.FromCreateStockDtoToStock();
+            _context.Stocks.Add(stockModel);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(GetById), new { id = stockModel.Id }, stockModel.ToStockDto());
         }
     }
 }

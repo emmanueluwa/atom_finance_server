@@ -22,5 +22,18 @@ namespace atom_finance_server.Mappers
                 MarketCap = stockModel.MarketCap
             };
         }
+
+        public static Stock FromCreateStockDtoToStock(this CreateStockRequestDto stockDto)
+        {
+            return new Stock
+            {
+                Symbol = stockDto.Symbol,
+                Company = stockDto.Company,
+                Purchase = stockDto.Purchase,
+                LastDiv = stockDto.LastDiv,
+                Industry = stockDto.Industry,
+                MarketCap = stockDto.MarketCap
+            };
+        }
     }
 }
