@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using atom_finance_server.Data;
+using atom_finance_server.Mappers;
 using atom_finance_server.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,8 @@ namespace atom_finance_server.Controllers
         public IActionResult GetAll()
         {
             //ToList - deferred excecution
-            var stocks = _context.Stocks.ToList();
+            var stocks = _context.Stocks.ToList()
+                .Select(s => s.ToStockDto());
 
             return Ok(stocks);
         }
@@ -37,7 +39,7 @@ namespace atom_finance_server.Controllers
                 return NotFound();
             }
 
-            return Ok(stock);
+            return Ok(stock.ToStockDto());
         }
     }
 }
