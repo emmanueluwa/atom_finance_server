@@ -21,5 +21,16 @@ namespace atom_finance_server.Repository
         {
             return await _context.Comments.ToListAsync();
         }
+
+        public async Task<Comment?> GetByIdAsync(int id)
+        {
+            var commentModel = await _context.Comments.FirstOrDefaultAsync((c) => c.Id == id);
+            if (commentModel == null)
+            {
+                return null;
+            }
+
+            return commentModel;
+        }
     }
 }

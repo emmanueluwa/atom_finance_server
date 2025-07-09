@@ -170,3 +170,7 @@
 /home/efulo/repos/wd/atom-finance-server/obj/Debug/net8.0/staticwebassets.build.json.cache
 /home/efulo/repos/wd/atom-finance-server/obj/Debug/net8.0/staticwebassets.build.endpoints.json
 /home/efulo/repos/wd/atom-finance-server/obj/Debug/net8.0/atom-fin.5823E9B9.Up2Date
+/home/efulo/repos/wd/atom-finance-server/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/efulo/repos/wd/atom-finance-server/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/efulo/repos/wd/atom-finance-server/bin/Debug/net8.0/Newtonsoft.Json.dll
+/home/efulo/repos/wd/atom-finance-server/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll

@@ -47,12 +47,12 @@ namespace atom_finance_server.Repository
 
         public async Task<List<Stock>> GetAllAsync()
         {
-            return await _context.Stocks.ToListAsync();
+            return await _context.Stocks.Include((c) => c.Comments).ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)
         {
-            var stockModel = await _context.Stocks.FirstOrDefaultAsync((x) => x.Id == id);
+            var stockModel = await _context.Stocks.Include((c) => c.Comments).FirstOrDefaultAsync((x) => x.Id == id);
 
             if (stockModel == null)
             {
