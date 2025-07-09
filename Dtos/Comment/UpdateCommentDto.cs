@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace atom_finance_server.Dtos.Comment
 {
-    public class CreateCommentDto
+    public class UpdateCommentDto
     {
         [Required]
         [MinLength(4, ErrorMessage = "Title must be atleast 4 characts")]
@@ -14,8 +14,8 @@ namespace atom_finance_server.Dtos.Comment
         public string Title { get; set; } = string.Empty;
 
         [Required]
-        [MinLength(4, ErrorMessage = "Content must be atleast 4 characts")]
-        [MaxLength(280, ErrorMessage = "Content cannot be more than 280 characters")]
+        [MinLength(4, ErrorMessage = "Comment must be atleast 4 characts")]
+        [MaxLength(280, ErrorMessage = "Comment cannot be more than 280 characters")]
         public string Content { get; set; } = string.Empty;
     }
 }
