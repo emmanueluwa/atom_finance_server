@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using atom_finance_server.Dtos.Stock;
+using atom_finance_server.Helpers;
 using atom_finance_server.Models;
 
 namespace atom_finance_server.Interfaces
 {
     public interface IStockRepository
     {
-        Task<List<Stock>> GetAllAsync();
+        Task<List<Stock>> GetAllAsync(QueryObject query);
 
         Task<Stock?> GetByIdAsync(int id);
 

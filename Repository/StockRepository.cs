@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using atom_finance_server.Data;
 using atom_finance_server.Dtos.Stock;
+using atom_finance_server.Helpers;
 using atom_finance_server.Interfaces;
 using atom_finance_server.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -45,9 +46,21 @@ namespace atom_finance_server.Repository
             return stockModel;
         }
 
-        public async Task<List<Stock>> GetAllAsync()
+        public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            return await _context.Stocks.Include((c) => c.Comments).ToListAsync();
+            var stocks = _context.Stocks.Include((c) => c.Comments).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(query.Company))
+            {
+                stocks = stocks.Where(s => s.Company.Contains(query.Company));
+            }
+
+            if (!string.IsNullOrWhiteSpace(query.Symbol))
+            {
+                stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+            }
+
+            return await stocks.ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using atom_finance_server.Data;
 using atom_finance_server.Dtos.Stock;
+using atom_finance_server.Helpers;
 using atom_finance_server.Interfaces;
 using atom_finance_server.Mappers;
 using atom_finance_server.Models;
@@ -27,12 +28,12 @@ namespace atom_finance_server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             //ToList - deferred excecution
-            var stocks = await _stockRepository.GetAllAsync();
+            var stocks = await _stockRepository.GetAllAsync(query);
 
             var stockDto = stocks.Select(s => s.ToStockDto());
 
