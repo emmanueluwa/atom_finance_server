@@ -32,5 +32,15 @@ namespace atom_finance_server.Mappers
             };
 
         }
+
+        public static Comment fromUpdateCommentDtoToComment(this UpdateCommentDto commentDto)
+        {
+            return new Comment
+            {
+                Title = commentDto.Title,
+                Content = commentDto.Content,
+            };
+
+        }
     }
 }

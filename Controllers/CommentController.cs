@@ -64,7 +64,7 @@ namespace atom_finance_server.Controllers
 
             await _commentRepository.CreateAsync(commentModel);
 
-            return CreatedAtAction(nameof(GetById), new { id = commentModel }, commentModel.fromCommentToCommentDto());
+            return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.fromCommentToCommentDto());
         }
 
         [HttpDelete("{id:int}")]
@@ -79,6 +79,20 @@ namespace atom_finance_server.Controllers
             }
 
             return Ok(commentModel);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCommentDto updateDto)
+        {
+            var comment = await _commentRepository.UpdateAsync(id, updateDto.fromUpdateCommentDtoToComment());
+            if (comment == null)
+            {
+                return NotFound("Comment does not exist");
+            }
+
+            return Ok(comment.fromCommentToCommentDto());
+
         }
     }
 }
