@@ -62,6 +62,11 @@ namespace atom_finance_server.Repository
             return stockModel;
         }
 
+        public Task<bool> StockExists(int id)
+        {
+            return _context.Stocks.AnyAsync((s) => s.Id == id);
+        }
+
         public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto stockDto)
         {
             var existingStockModel = await _context.Stocks.FirstOrDefaultAsync((x) => x.Id == id);
