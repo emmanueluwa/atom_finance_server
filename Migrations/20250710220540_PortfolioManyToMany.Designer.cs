@@ -12,8 +12,8 @@ using atom_finance_server.Data;
 namespace atom_finance_server.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250710010704_SeedRoleData")]
-    partial class SeedRoleData
+    [Migration("20250710220540_PortfolioManyToMany")]
+    partial class PortfolioManyToMany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,6 +266,21 @@ namespace atom_finance_server.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("atom_finance_server.Models.Portfolio", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("StockId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppUserId", "StockId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("Portfolios");
+                });
+
             modelBuilder.Entity("atom_finance_server.Models.Stock", b =>
                 {
                     b.Property<int>("Id")
@@ -360,9 +375,35 @@ namespace atom_finance_server.Migrations
                     b.Navigation("Stock");
                 });
 
+            modelBuilder.Entity("atom_finance_server.Models.Portfolio", b =>
+                {
+                    b.HasOne("atom_finance_server.Models.AppUser", "AppUser")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("atom_finance_server.Models.Stock", "Stock")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("atom_finance_server.Models.AppUser", b =>
+                {
+                    b.Navigation("Portfolios");
+                });
+
             modelBuilder.Entity("atom_finance_server.Models.Stock", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Portfolios");
                 });
 #pragma warning restore 612, 618
         }
