@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using atom_finance_server.Data;
 
@@ -11,9 +12,11 @@ using atom_finance_server.Data;
 namespace atom_finance_server.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250710010146_SeedRole")]
+    partial class SeedRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace atom_finance_server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
+                            Id = "6de956e8-4b68-453c-b5a0-0d64f9f41065",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2",
+                            Id = "c408adca-27b6-45e4-aeb8-2206064f3952",
                             Name = "User",
                             NormalizedName = "USER"
                         });
