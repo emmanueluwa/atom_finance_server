@@ -9,6 +9,7 @@ using atom_finance_server.Interfaces;
 using atom_finance_server.Mappers;
 using atom_finance_server.Models;
 using atom_finance_server.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,7 @@ namespace atom_finance_server.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
