@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("atom-finance-server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+838339b78dcc41e97b44e7b9bf488850fcc95db4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0132a560e42695b335f21720ed77f789241c88fc")]
 [assembly: System.Reflection.AssemblyProductAttribute("atom-finance-server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("atom-finance-server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
