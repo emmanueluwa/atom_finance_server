@@ -112,6 +112,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//cors
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
+    // .WithOrigins("https://localhost:44351") deployment
+    .SetIsOriginAllowed(origin => true)
+);
+
 app.UseAuthentication();
 app.UseAuthorization();
 

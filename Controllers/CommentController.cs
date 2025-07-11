@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using atom_finance_server.Dtos.Comment;
 using atom_finance_server.Extensions;
+using atom_finance_server.Helpers;
 using atom_finance_server.Interfaces;
 using atom_finance_server.Mappers;
 using atom_finance_server.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,12 +32,13 @@ namespace atom_finance_server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Authorize]
+        public async Task<IActionResult> GetAll([FromQuery] CommentQueryObject queryObject)
         {
             //inherited from controller base
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var comments = await _commentRepository.GetAllAsync();
+            var comments = await _commentRepository.GetAllAsync(queryObject);
 
             var commentDto = comments.Select((c) => c.fromCommentToCommentDto());
 

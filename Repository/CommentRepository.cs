@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using atom_finance_server.Data;
+using atom_finance_server.Helpers;
 using atom_finance_server.Interfaces;
 using atom_finance_server.Models;
 using Microsoft.EntityFrameworkCore;
@@ -40,9 +41,21 @@ namespace atom_finance_server.Repository
             return commentModel;
         }
 
-        public async Task<List<Comment>> GetAllAsync()
+        public async Task<List<Comment>> GetAllAsync(CommentQueryObject queryObject)
         {
-            return await _context.Comments.Include(a => a.AppUser).ToListAsync();
+            var comments = _context.Comments.Include(a => a.AppUser).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryObject.Symbol))
+            {
+                comments = comments.Where(s => s.Stock.Symbol == queryObject.Symbol);
+            };
+
+            if (queryObject.IsDescending == true)
+            {
+                comments = comments.OrderByDescending(c => c.CreatedOn);
+            }
+
+            return await comments.ToListAsync();
         }
 
         public async Task<Comment?> GetByIdAsync(int id)
