@@ -16,5 +16,9 @@ namespace atom_finance_server.Models
         public int? StockId { get; set; }
         //navigation property - allows us to access into model
         public Stock? Stock { get; set; }
+
+        //one to one
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }
