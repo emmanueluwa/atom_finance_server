@@ -37,9 +37,9 @@ namespace atom_finance_server.Controllers
             //ToList - deferred excecution
             var stocks = await _stockRepository.GetAllAsync(query);
 
-            var stockDto = stocks.Select(s => s.ToStockDto());
+            var stockDto = stocks.Select(s => s.ToStockDto()).ToList();
 
-            return Ok(stocks);
+            return Ok(stockDto);
         }
 
         [HttpGet("{id:int}")]
