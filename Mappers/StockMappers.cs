@@ -36,5 +36,18 @@ namespace atom_finance_server.Mappers
                 MarketCap = stockDto.MarketCap
             };
         }
+
+        public static Stock FromFMPStockToStock(this FMPStock fmpStock)
+        {
+            return new Stock
+            {
+                Symbol = fmpStock.symbol,
+                Company = fmpStock.companyName,
+                Purchase = (decimal)fmpStock.price,
+                LastDiv = (decimal)fmpStock.lastDividend,
+                Industry = fmpStock.industry,
+                MarketCap = fmpStock.marketCap
+            };
+        }
     }
 }
